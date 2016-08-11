@@ -78,7 +78,7 @@ public class GCMIntentService extends GCMBaseIntentService {
             }
         }
 	}
-
+	public static int notId = 0;
 	public void createNotification(Context context, Bundle extras)
 	{
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -111,6 +111,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		String message = extras.getString("message");
 		if (message != null) {
 			mBuilder.setContentText(message);
+			mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));//add this line
 		} else {
 			mBuilder.setContentText("<missing message content>");
 		}
@@ -120,7 +121,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 			mBuilder.setNumber(Integer.parseInt(msgcnt));
 		}
 		
-		int notId = 0;
+		notId++;
 		
 		try {
 			notId = Integer.parseInt(extras.getString("notId"));
